@@ -248,27 +248,33 @@ function addToCart(idProduct) {
     }
 }
 addToCart();
-function loginAccount(){
+function loginAccount() {
     let users = JSON.parse(localStorage.getItem("users")) || [];
     let checkLogin = localStorage.getItem("idUser");
-    for (let i = 0; i < users.length; i++) {
-        let text = "";
-        if (users[i].id == checkLogin) {
-            text +=
-            `
-            <a href="./register.html"><i class="fa-solid fa-user-plus"></i> ${users[i].name}</a>
-                <a href="./login.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> Log out</a>
-            
-            `
-        }else{
-            text +=
-            `
-            <a href="./register.html"><i class="fa-solid fa-user"></i> </a>
-                <a href="./login.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> Log In</a>
-            `
-        }
+    let text = ""; // Khai báo text ở ngoài vòng lặp
 
+    for (let i = 0; i < users.length; i++) {
+        if (users[i].id == checkLogin) {
+            text += `
+                <a href="./register.html">
+                    <i class="fa-solid fa-user-plus"></i> ${users[i].name}
+                </a>
+                <a href="/login.html">
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i> Logout
+                </a>
+            `;
+        } else {
+            text += `
+                <a href="/register.html">
+                    <i class="fa-solid fa-user"></i> 
+                </a>
+                <a href="/login.html">
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i> Login
+                </a>
+            `;
         }
-        document.getElementsByClassName("cards")[0].innerHTML = text;
+    }
+    
+    // Sửa lại selector và gán HTML
+    document.getElementsByClassName("cards")[0].innerHTML = text;
 }
-loginAccount()
